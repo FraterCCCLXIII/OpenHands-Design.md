@@ -445,7 +445,7 @@ Defined via CSS custom properties and Tailwind mapping:
 
 **Semantic status colors:** Use `text-success` / `bg-success`, `text-warning` / `bg-warning`, `text-info` / `bg-info`, `text-destructive` / `bg-destructive` — never raw chromatic palette classes like `text-green-500`, `bg-amber-400`, `text-blue-500`, etc.
 
-**Current debt:** `themeAppClassMap.ts` and `NewUserExperienceFlowchart.tsx` still use raw `stone-*` / `rgb()` values (theme definition files — intentionally deferred). The `ChatThread.tsx` `messageTypeColors` map uses chromatic palette for multi-category distinctness — no semantic equivalent yet.
+**Current debt:** `themeAppClassMap.ts` and `NewUserExperienceFlowchart.tsx` still use raw `stone-*` / `rgb()` values (theme definition maps — intentionally deferred; requires per-theme CSS variable architecture). `ChatThread.tsx` `messageTypeColors` has 4 remaining raw palette colors (`orange-500`, `indigo-500`, `purple-500`, `pink-500`) for categorical distinctness — no semantic tokens defined for these yet.
 
 ### Typography
 
@@ -539,8 +539,8 @@ Defined via CSS custom properties and Tailwind mapping:
 
 | Duration | Uses | When |
 |----------|------|------|
-| `duration-200` | 134 | **Standard** — most interactions |
-| `duration-300` | 106 | Slightly longer — panel transitions, expand/collapse |
+| `duration-200` | ~48 | **Standard** — local, small feedback: toggles, chevron rotation, sidebar width, card/row hovers, opacity on hover, dialogs |
+| `duration-300` | ~34 | **Layout motion** — panel/drawer resize, sheet exit, canvas split, login/marketing card hover, grid row animations |
 
 ### Easing
 
@@ -595,36 +595,3 @@ Defined via CSS custom properties and Tailwind mapping:
 7. **`hover:bg-muted/60`** is the canonical hover background. Use it consistently across menus, nav items, and interactive rows.
 8. **The `Button` component handles its own variants** — don't rebuild button styles from scratch. Use `variant="outline"` for most secondary actions.
 
----
-
-## 11. Normalization Backlog
-
-### Completed
-- [x] `.dark` CSS block now declares all variables from `:root` (`--modal-background`, `--radius-*`, `--success`, `--warning`, `--info`, `--gradient-*`, `--shadow-*`, `--font-*`, `--settings-*`)
-- [x] Migrated ~160 raw `stone-*` utility classes across 17 component files to semantic tokens (excluding `themeAppClassMap.ts`, `index.ts`, and scrollbar utilities)
-- [x] Migrated ~44 raw `gray-*` utility classes across 10 files to semantic tokens
-- [x] Migrated ~83 raw `neutral-*` classes across 3 files to semantic tokens (preserving VS Code diff mock borders)
-- [x] Replaced 47 arbitrary border radius values (`rounded-[6px]` → `rounded-lg`, `rounded-[100px]` → `rounded-full`, `rounded-[12px]` → `rounded-xl`, `rounded-[4px]` → `rounded-md`, `rounded-r-[100px]` → `rounded-r-full`)
-- [x] Replaced 74 arbitrary font sizes (`text-[11px]` → `text-xs`, `text-[10px]` → `text-xs`, `text-[12px]` → `text-xs`)
-- [x] Standardized 57 `hover:bg-muted` opacity variants (`/40`, `/50`, `/70`, `/80`) to canonical `/60`
-- [x] Replaced 6 unsafe `text-white` usages with semantic tokens (`text-foreground`, `text-card-foreground`)
-- [x] Replaced `bg-[#141414]` → `bg-secondary` (2 instances)
-- [x] Migrated ~100+ chromatic palette classes to semantic tokens: `amber/yellow` → `warning`, `blue/sky` → `info`, `green/emerald` → `success`, `red` → `destructive`
-- [x] Unified tooltip backgrounds from `bg-popover`/`bg-card` to `bg-muted` across all 6 tooltip instances
-- [x] Fixed 33 inline white buttons (`bg-white text-black hover:bg-muted/60` → `bg-primary text-primary-foreground hover:bg-primary/85`)
-- [x] Fixed Button `light` variant from `bg-white text-black hover:bg-zinc-200` to `bg-primary text-primary-foreground hover:bg-primary/85`
-- [x] Removed Dialog `--ring` inline override (`0 0% 95%`) that caused inconsistent focus ring color in modals
-- [x] Updated global `--ring` from `0 0% 50%` to `0 0% 80%` for better visibility
-- [x] Normalized ~50 inline input/textarea/select focus styles to canonical `focus-visible:` pattern (from mixed `focus:`/`focus-visible:` with missing offsets)
-- [x] Changed all focus rings from `ring-2` to `ring-1` site-wide (~97 instances across 39 files)
-- [x] Added `appearance: none` on `input[type="search"]` to strip browser default focus chrome
-- [x] Removed focus ring from dialog close button
-
-### Remaining
-- [ ] Unify `themeAppClassMap.ts` and `NewUserExperienceFlowchart.tsx` theme maps to use semantic tokens instead of raw `stone-*` / `rgb()` values
-- [ ] Migrate legacy `index.ts` prototype file to semantic tokens (large scope — consider phasing out)
-- [ ] Audit `duration-200` vs `duration-300` usage and document when each is appropriate
-- [ ] Consolidate `active:scale-95` (7 uses) vs `active:scale-[0.97]` (Button standard) to one value
-- [ ] Evaluate whether `sepia` theme in `themeAppClassMap.ts` should use CSS variables instead of hardcoded `rgb()` values
-- [ ] Define semantic tokens for `ChatThread.tsx` `messageTypeColors` categorical palette
-- [ ] Audit remaining `bg-white` usages in non-button contexts (toggles, decorative elements) for token migration
