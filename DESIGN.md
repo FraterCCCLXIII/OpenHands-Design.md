@@ -2,7 +2,7 @@
 
 ## 1. Visual Theme & Atmosphere
 
-OpenHands is a dark-first AI agent platform built on a near-black monochrome canvas with a purple accent for AI identity. The entire experience lives on a `0 0% 5%` HSL background — effectively `#0d0d0d` — with `0 0% 98%` foreground text that reads as warm off-white. Every surface is a shade of neutral grey scaled in 2–5% lightness increments, creating depth through tonal variation rather than color. The only chromatic moments are semantic: purple for agent activity, green for success, red-orange for danger, amber for warnings, and blue for informational states.
+OpenHands is a dark-first AI agent platform built on a near-black monochrome canvas. The entire experience lives on a `0 0% 5%` HSL background — effectively `#0d0d0d` — with `0 0% 98%` foreground text that reads as warm off-white. Every surface is a shade of neutral grey scaled in 2–5% lightness increments, creating depth through tonal variation rather than color. The only chromatic moments are semantic: green for success, red-orange for danger, amber for warnings, and blue for informational states.
 
 Typography is carried by **Inter** (sans-serif) for all UI text and **JetBrains Mono** for code, terminals, and technical labels. The type system is weight-restrained — `font-medium` (500) is the workhorse, `font-semibold` (600) for headings and emphasis, and `font-normal` (400) for body. Bold (700) is rare and reserved for maximum emphasis.
 
@@ -11,7 +11,6 @@ The UI framework is **React + Tailwind CSS + Radix primitives** (shadcn/ui patte
 **Key characteristics:**
 - Near-black monochrome canvas (`#0d0d0d` background, `#fafafa` foreground)
 - Neutral grey surface scale in 2–5% lightness increments (5% → 7% → 8% → 12% → 14% → 18%)
-- Purple agent accent (`hsl(271 91% 65%)`) as the single chromatic identity color
 - Inter + JetBrains Mono dual-font system
 - HSL-based CSS custom property architecture for full theme overridability
 - Tailwind utility-first styling with Radix UI headless primitives
@@ -69,21 +68,12 @@ All colors are declared as HSL triplets (without the `hsl()` wrapper) in CSS cus
 | `--destructive-foreground` | `0 0% 98%` | `#fafafa` | Text on destructive surfaces |
 | `--ring` | `0 0% 80%` | `#cccccc` | Focus rings (1px, keyboard-only via `focus-visible:`) |
 
-### Agent / AI Identity
-
-| Token | HSL | Hex | Role |
-|-------|-----|-----|------|
-| `--agent-active` | `271 91% 65%` | `#a855f7` | Active AI agent indicator, purple accent |
-| `--agent-glow` | `271 91% 65%` | `#a855f7` | AI agent glow effect |
-| `--gradient-agent` | `linear-gradient(135deg, hsl(271 91% 65%) 0%, #fff 100%)` | — | Agent gradient (purple → white) |
-
 ### Gradients & Decorative
 
 | Token | Value | Role |
 |-------|-------|------|
 | `--gradient-card-hover` | `linear-gradient(180deg, hsl(0 0% 9%) 0%, hsl(0 0% 7%) 100%)` | Subtle card hover gradient |
 | `--shadow-card` | `0 1px 2px 0 hsl(0 0% 0% / 0.3)` | Default card shadow |
-| `--shadow-agent` | `0 0 20px hsl(271 91% 65% / 0.3)` | Purple glow for AI elements |
 
 ### Hover Backgrounds
 
@@ -416,7 +406,6 @@ Defined via CSS custom properties and Tailwind mapping:
 | Token | Value | Role |
 |-------|-------|------|
 | `--shadow-card` | `0 1px 2px 0 hsl(0 0% 0% / 0.3)` | Card resting shadow |
-| `--shadow-agent` | `0 0 20px hsl(271 91% 65% / 0.3)` | Purple AI glow |
 
 ### Elevation Levels
 
@@ -427,7 +416,6 @@ Defined via CSS custom properties and Tailwind mapping:
 | 2 — Raised | `shadow-md` + `border` | Dropdown menus, popovers |
 | 3 — Floating | `shadow-lg` + `border` | Modals, dialogs, sheets |
 | 4 — Overlay | `shadow-xl` or `shadow-2xl` | Full-screen overlays, drawers |
-| Glow | `--shadow-agent` | AI agent active state |
 
 ### Border System
 
@@ -455,9 +443,9 @@ Defined via CSS custom properties and Tailwind mapping:
 | Use `text-destructive` for error text | Use `text-red-500` or `text-rose-500` |
 | Use `hover:text-foreground` for hover text brightening | Use `hover:text-white` except in sidebar context |
 
-**Semantic status colors:** Use `text-success` / `bg-success`, `text-warning` / `bg-warning`, `text-info` / `bg-info`, `text-destructive` / `bg-destructive`, and `text-agent` / `bg-agent` — never raw chromatic palette classes like `text-green-500`, `bg-amber-400`, `text-blue-500`, etc.
+**Semantic status colors:** Use `text-success` / `bg-success`, `text-warning` / `bg-warning`, `text-info` / `bg-info`, `text-destructive` / `bg-destructive` — never raw chromatic palette classes like `text-green-500`, `bg-amber-400`, `text-blue-500`, etc.
 
-**Current debt:** `themeAppClassMap.ts` and `NewUserExperienceFlowchart.tsx` still use raw `stone-*` / `rgb()` values (theme definition files — intentionally deferred). The `ChatThread.tsx` `messageTypeColors` map uses chromatic palette for multi-category distinctness (orange/yellow/blue/indigo/purple/pink) — no semantic equivalent yet.
+**Current debt:** `themeAppClassMap.ts` and `NewUserExperienceFlowchart.tsx` still use raw `stone-*` / `rgb()` values (theme definition files — intentionally deferred). The `ChatThread.tsx` `messageTypeColors` map uses chromatic palette for multi-category distinctness — no semantic equivalent yet.
 
 ### Typography
 
@@ -584,7 +572,6 @@ Defined via CSS custom properties and Tailwind mapping:
 - Card surface: `bg-card` → `hsl(0 0% 7%)` → `#121212`
 - Border: `border-border` → `hsl(0 0% 14%)` → `#242424`
 - Hover background: `bg-muted/60` → `hsl(0 0% 12% / 0.6)`
-- AI accent: `text-agent` → `hsl(271 91% 65%)` → `#a855f7`
 - Success: `text-success-foreground` → `hsl(142 71% 76%)` → `#86efac`
 - Error: `text-destructive` → `hsl(0 72% 51%)` → `#dc2626`
 
@@ -613,7 +600,7 @@ Defined via CSS custom properties and Tailwind mapping:
 ## 11. Normalization Backlog
 
 ### Completed
-- [x] `.dark` CSS block now declares all variables from `:root` (`--modal-background`, `--radius-*`, `--success`, `--warning`, `--info`, `--agent-*`, `--gradient-*`, `--shadow-*`, `--font-*`, `--settings-*`)
+- [x] `.dark` CSS block now declares all variables from `:root` (`--modal-background`, `--radius-*`, `--success`, `--warning`, `--info`, `--gradient-*`, `--shadow-*`, `--font-*`, `--settings-*`)
 - [x] Migrated ~160 raw `stone-*` utility classes across 17 component files to semantic tokens (excluding `themeAppClassMap.ts`, `index.ts`, and scrollbar utilities)
 - [x] Migrated ~44 raw `gray-*` utility classes across 10 files to semantic tokens
 - [x] Migrated ~83 raw `neutral-*` classes across 3 files to semantic tokens (preserving VS Code diff mock borders)
@@ -622,7 +609,7 @@ Defined via CSS custom properties and Tailwind mapping:
 - [x] Standardized 57 `hover:bg-muted` opacity variants (`/40`, `/50`, `/70`, `/80`) to canonical `/60`
 - [x] Replaced 6 unsafe `text-white` usages with semantic tokens (`text-foreground`, `text-card-foreground`)
 - [x] Replaced `bg-[#141414]` → `bg-secondary` (2 instances)
-- [x] Migrated ~100+ chromatic palette classes to semantic tokens: `amber/yellow` → `warning`, `blue/sky` → `info`, `green/emerald` → `success`, `red` → `destructive`, `purple` → `agent`
+- [x] Migrated ~100+ chromatic palette classes to semantic tokens: `amber/yellow` → `warning`, `blue/sky` → `info`, `green/emerald` → `success`, `red` → `destructive`
 - [x] Unified tooltip backgrounds from `bg-popover`/`bg-card` to `bg-muted` across all 6 tooltip instances
 - [x] Fixed 33 inline white buttons (`bg-white text-black hover:bg-muted/60` → `bg-primary text-primary-foreground hover:bg-primary/85`)
 - [x] Fixed Button `light` variant from `bg-white text-black hover:bg-zinc-200` to `bg-primary text-primary-foreground hover:bg-primary/85`
@@ -639,5 +626,5 @@ Defined via CSS custom properties and Tailwind mapping:
 - [ ] Audit `duration-200` vs `duration-300` usage and document when each is appropriate
 - [ ] Consolidate `active:scale-95` (7 uses) vs `active:scale-[0.97]` (Button standard) to one value
 - [ ] Evaluate whether `sepia` theme in `themeAppClassMap.ts` should use CSS variables instead of hardcoded `rgb()` values
-- [ ] Define semantic tokens for `ChatThread.tsx` `messageTypeColors` categorical palette (orange/yellow/blue/indigo/purple/pink)
+- [ ] Define semantic tokens for `ChatThread.tsx` `messageTypeColors` categorical palette
 - [ ] Audit remaining `bg-white` usages in non-button contexts (toggles, decorative elements) for token migration

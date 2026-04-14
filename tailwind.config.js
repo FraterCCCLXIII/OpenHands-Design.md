@@ -67,10 +67,6 @@ export default {
         },
         warning: "hsl(var(--warning) / <alpha-value>)",
         info: "hsl(var(--info) / <alpha-value>)",
-        agent: {
-          DEFAULT: "hsl(var(--agent-active))",
-          glow: "hsl(var(--agent-glow))",
-        },
       },
       borderRadius: {
         modal: "var(--radius-modal)",

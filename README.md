@@ -146,7 +146,6 @@ Semantic colors:
   --warning       hsl(38 92% 50%)    Amber — warnings, in-progress
   --info          hsl(217 91% 60%)   Blue — links, informational
   --destructive   hsl(0 72% 51%)     Red — errors, danger
-  --agent-active  hsl(271 91% 65%)   Purple — AI agent identity
 ```
 
 ## Button Variants
@@ -173,7 +172,6 @@ Edit the HSL values in `globals.css`. Every UI element updates automatically:
   --background: 220 20% 5%;   /* Add a blue tint */
   --card: 220 15% 8%;
   --border: 220 10% 16%;
-  --agent-active: 150 80% 50%; /* Change AI accent to green */
 }
 ```
 
